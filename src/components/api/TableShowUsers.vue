@@ -53,9 +53,11 @@ export default {
 
       if (resp.data.rows > 0) {
         this.users = userData;
-        console.log(`resp`, resp);
+        
         console.log(userData);
       }
+
+      console.log(`resp`, resp);
     },
     getUserById(userId, actionStr) {
       if (actionStr == "edit") {

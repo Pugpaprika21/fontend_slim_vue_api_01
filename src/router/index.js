@@ -25,10 +25,16 @@ const router = createRouter({
             component: ContactView,
         },
         {
-            path: "/editUser/:userId", // แก้ไข path เส้นทางให้เป็น "/editUser/:userId"
+            path: "/editUser",
             name: "edit",
             component: EditUserById,
-            props: true
+            props: (route) => ({
+                userId: route.params.userId,
+                token: route.params.token,
+            }),
+            meta: {
+                requiresAuth: true,
+            },
         },
     ],
 });

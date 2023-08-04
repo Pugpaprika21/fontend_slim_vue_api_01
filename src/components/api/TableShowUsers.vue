@@ -9,7 +9,7 @@ export default {
     return {
       api: {
         url: "http://localhost:8080/",
-        token: "bWVldGluZy5ibWE6bWVldGluZy5iaXpwb3RlbnRpYWw="
+        token: "bWVldGluZy5ibWE6bWVldGluZy5iaXpwb3RlbnRpYWw=",
       },
       users: [],
       currentPage: 1,
@@ -53,15 +53,23 @@ export default {
 
       if (resp.data.rows > 0) {
         this.users = userData;
-        
-        console.log(userData);
+
+        //console.log(userData);
+        return;
       }
 
       console.log(`resp`, resp);
     },
     getUserById(userId, actionStr) {
       if (actionStr == "edit") {
-        this.$router.push(`/editUser/${userId}`);
+        console.log(userId);
+        this.$router.push({
+          name: "edit",
+          query: {
+            userId: userId,
+            token: this.api.token,
+          },
+        });
       } else {
         console.log(userId, actionStr);
       }
@@ -156,10 +164,9 @@ export default {
 </template>
 
 <style scoped>
-
 .thead-color td {
   background-color: #4caf66;
-  color: white; 
+  color: white;
 }
 .button {
   background-color: #574caf; /* Green */

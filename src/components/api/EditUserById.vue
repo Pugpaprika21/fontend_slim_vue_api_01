@@ -20,7 +20,6 @@ export default {
   mounted() {
     this.userId = this.$route.query.userId;
     this.api.token = this.$route.query.token;
-
     this.editUser();
   },
   methods: {

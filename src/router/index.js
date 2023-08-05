@@ -4,6 +4,7 @@ import AboutView from "../views/AboutView.vue";
 import ContactView from "../views/ContactView.vue";
 import EditUserById from "../components/api/EditUserById.vue";
 import DeleteUserById from "../components/api/DeleteUserById.vue";
+import FormCreateUser from "../views/FormCreateUser.vue";
 
 const router = createRouter({
     history: createWebHistory(
@@ -22,6 +23,12 @@ const router = createRouter({
             path: "/contact",
             name: "contact",
             component: ContactView,
+        },
+
+        {
+            path: "/createUser",
+            name: "create",
+            component: FormCreateUser,
         },
         {
             path: "/editUser",

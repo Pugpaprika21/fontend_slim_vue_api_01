@@ -1,11 +1,13 @@
-//import './assets/main.css'
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router";
+import Swal from "sweetalert2";
+import "sweetalert2/dist/sweetalert2.min.css";
 
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
+const app = createApp(App);
 
-const app = createApp(App)
+app.config.globalProperties.$swal = Swal;
 
-app.use(router)
+app.use(router);
 
-app.mount('#app')
+app.mount("#app");

@@ -53,14 +53,10 @@ export default {
 
       if (resp.data.rows > 0) {
         this.users = userData;
-
-        //console.log(userData);
         return;
       }
-
-      console.log(`resp`, resp);
     },
-    getUserById(userId, actionStr) {
+    async getUserById(userId, actionStr) {
       if (actionStr == "edit") {
         this.$router.push({
           name: "edit",
@@ -70,13 +66,17 @@ export default {
           },
         });
       } else {
-        this.$router.push({
-          name: "delete",
-          query: {
-            userId: userId,
-            token: this.api.token,
-          },
-        });
+        const url = `${this.api.url}deleteUser`;
+        const params = { params: { token: this.api.token, userId: userId } };
+        const resp = await axios.delete(url, params);
+
+        if (resp.data.rows > 0) {
+          this.$swal.fire("สำเร็จ", "ลบข้อมูลสำเร็จ", "success").then((result) => {
+            this.$router.push("/");
+          }).catch((err) => {
+            console.log(err);
+          });
+        }
       }
     },
   },
@@ -90,7 +90,7 @@ export default {
   <div class="container">
     <div class="row mt-4">
       <div class="col-6 col-md-8">
-        <router-link to="/about" class="button btn-add-user"
+        <router-link to="/createUser" class="button btn-add-user"
           >เพิ่มผู้ใช้งาน</router-link
         >
       </div>

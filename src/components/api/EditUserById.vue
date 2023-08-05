@@ -38,32 +38,27 @@ export default {
     },
     async updateUser(event) {
       event.preventDefault();
-      //const url = `http://localhost/project-php/service/update_user.php?userId=${this.userId}`;
+
       const url = `${this.api.url}updateUser/${this.userId}`;
       const params = {
-        params: {
-          token: this.api.token,
-          user: {
-            user_name: this.user.username,
-            user_email: this.user.useremail,
-          },
+        token: this.api.token,
+        userId: this.userId,
+        user: {
+          user_id: this.userId,
+          user_name: this.user.username,
+          user_email: this.user.useremail,
         },
       };
-      const config = {
-        headers: {
-          "Access-Control-Allow-Methods": "*",
-          "Access-Control-Allow-Headers": "*",
-          "Access-Control-Allow-Origin": "*",
-          "Content-Type": "application/json",
-          "Content-Type": "multipart/form-data",
-        },
+      const headers = {
+        Authorization: `Bearer ${this.api.token}`,
+        "Content-Type": "application/json",
       };
 
-      const resp = await axios.get(url, params, config);
+      const resp = await axios.put(url, null, { params, headers });
+
       if (resp.data.rows > 0) {
         const dataUpdate = resp.data.data[0];
         this.$router.push("/");
-        console.log(dataUpdate);
       }
     },
   },

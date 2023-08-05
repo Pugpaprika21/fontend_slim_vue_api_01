@@ -19,11 +19,11 @@ import { RouterLink, RouterView } from "vue-router";
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <router-link to="/" class="nav-link" aria-current="page"
+          <!-- <router-link to="/" class="nav-link" aria-current="page"
             >Home</router-link
           >
           <router-link to="/about" class="nav-link">About</router-link>
-          <router-link to="/contact" class="nav-link">Contact</router-link>
+          <router-link to="/contact" class="nav-link">Contact</router-link> -->
         </div>
       </div>
     </div>

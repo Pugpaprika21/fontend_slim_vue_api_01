@@ -35,13 +35,37 @@ export default {
         this.user.userId = userData.user_id;
         this.user.username = userData.user_name;
         this.user.useremail = userData.user_email;
-
-        console.log(userData);
       }
     },
-    updateUser(event) {
+    async updateUser(event) {
       event.preventDefault();
-      console.log(this.user.username);
+      //const url = `http://localhost/project-php/service/update_user.php?userId=${this.userId}`;
+      const url = `${this.api.url}updateUser/${this.userId}`;
+      const params = {
+        params: {
+          token: this.api.token,
+          user: {
+            user_name: this.user.username,
+            user_email: this.user.useremail,
+          },
+        },
+      };
+      const config = {
+        headers: {
+          "Access-Control-Allow-Methods": "*",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
+        },
+      };
+
+      const resp = await axios.get(url, params, config);
+      if (resp.data.rows > 0) {
+        const dataUpdate = resp.data.data[0];
+        this.$router.push("/");
+        console.log(dataUpdate);
+      }
     },
   },
   // setup() {
@@ -68,10 +92,16 @@ export default {
             </div>
             <div class="input-group mb-3">
               <span class="input-group-text" id="user-useremail">email</span>
-              <input type="email" class="form-control" v-model="user.useremail" />
+              <input
+                type="text"
+                class="form-control"
+                v-model="user.useremail"
+              />
             </div>
             <div class="btn-update">
-              <button type="submit" class="btn btn-success btn-sm w-100">เเก้ไข</button>
+              <button type="submit" class="btn btn-success btn-sm w-100">
+                เเก้ไข
+              </button>
             </div>
           </form>
           <!--  -->

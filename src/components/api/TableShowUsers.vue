@@ -62,7 +62,6 @@ export default {
     },
     getUserById(userId, actionStr) {
       if (actionStr == "edit") {
-        console.log(userId);
         this.$router.push({
           name: "edit",
           query: {
@@ -71,7 +70,13 @@ export default {
           },
         });
       } else {
-        console.log(userId, actionStr);
+        this.$router.push({
+          name: "delete",
+          query: {
+            userId: userId,
+            token: this.api.token,
+          },
+        });
       }
     },
   },
